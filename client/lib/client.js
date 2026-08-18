@@ -201,6 +201,20 @@ window.__ModuleLoader__.load({
 				});
 			};
 
+			// 朗读完成自动复位：引擎是权威播放器，轮询 /v1/status 直到播放结束
+			react.useEffect(function () {
+				if (!speaking[0]) return;
+				var timer = setInterval(function () {
+					engineStatus().then(function (st) {
+						if (!st.playing && !st.preparing) {
+							setSpeaking(false);
+							setActiveMessage(null);
+						}
+					}).catch(function () {});
+				}, 1000);
+				return function () { clearInterval(timer); };
+			}, [speaking[0]]);
+
 			return react.createElement("button", {
 				className: "ov-speak" + (speaking[0] ? " ov-speak-active" : ""),
 				title: speaking[0] ? "停止朗读（豆包音色 · Omi 引擎）" : "朗读（豆包音色 · Omi 引擎）",
