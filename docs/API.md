@@ -10,15 +10,17 @@
 
 ## 1. 总览
 
-插件是**遥控器**，引擎是**权威播放器**（D1 决策）。插件只负责：界面按钮、自动朗读开关、把文本发给引擎；播放、变速、暂停、缓存、Key 全部在引擎侧。
+插件是**遥控器**，引擎是**权威播放器**（D1 决策）。插件只负责：界面按钮、把文本发给引擎；播放、变速、暂停/继续、缓存、Key 全部在引擎侧。
 
 ```
-GET  /v1/status           健康/状态检查（含是否已配 Key、是否正在播放）
+GET  /v1/status           健康/状态检查（含是否已配 Key、播放状态、失败原因）
 POST /v1/speak            朗读一段文本（打断当前播放）
+POST /v1/pause            暂停当前朗读（保留位置）
+POST /v1/resume           从暂停位置继续朗读
 POST /v1/stop             停止当前朗读（幂等）
 ```
 
-v1 不提供（预留 v1.1）：`GET /v1/voices` 音色列表、`POST /v1/pause` / `/v1/resume`、分段预取。
+v1 不提供（预留 v1.1）：`GET /v1/voices` 音色列表、分段预取。
 
 ## 2. 端点定义
 
@@ -36,7 +38,10 @@ v1 不提供（预留 v1.1）：`GET /v1/voices` 音色列表、`POST /v1/pause`
   "protocolVersion": 1,
   "keyConfigured": true,
   "voice": "zh_female_shuangkuaisisi_moon_bigtts",
+  "state": "idle",
   "playing": false,
+  "paused": false,
+  "message": null,
   "currentTaskId": null
 }
 ```
@@ -46,8 +51,11 @@ v1 不提供（预留 v1.1）：`GET /v1/voices` 音色列表、`POST /v1/pause`
 | `engine` | 固定 `"omi"` |
 | `keyConfigured` | 引擎 Keychain 里是否有豆包 Key（插件据此决定提示文案） |
 | `voice` | 当前音色 ID（v1.1 才开放切换） |
-| `playing` | 是否正在播放（插件用于 🔊 变「停止」态） |
-| `currentTaskId` | 当前朗读任务 id（v1.1 用于暂停/续播；v1 可忽略） |
+| `state` | `idle` / `preparing` / `playing` / `paused` / `failed` |
+| `playing` | 是否正在播放（`state == "playing"`） |
+| `paused` | 是否已暂停（`state == "paused"`） |
+| `message` | `state == "failed"` 时的失败原因（面向用户的中文文案），否则 `null` |
+| `currentTaskId` | 当前朗读任务 id（占位，v1 可忽略） |
 
 **失败**：引擎未启动时 fetch 直接连接失败（插件侧处理，见 §4）。
 
@@ -92,6 +100,30 @@ v1 不提供（预留 v1.1）：`GET /v1/voices` 音色列表、`POST /v1/pause`
 ### 2.3 POST /v1/stop
 
 停止当前朗读。**幂等**：未在播放时调用也返回成功。
+
+**请求体**：`{}`（可空）
+
+**200 OK**
+
+```json
+{ "ok": true }
+```
+
+### 2.4 POST /v1/pause
+
+暂停当前朗读，**保留播放位置**（继续时从暂停处接着读）。未在播放时调用为幂等空操作。
+
+**请求体**：`{}`（可空）
+
+**200 OK**
+
+```json
+{ "ok": true }
+```
+
+### 2.5 POST /v1/resume
+
+从暂停位置继续朗读。未在暂停态时调用为幂等空操作。
 
 **请求体**：`{}`（可空）
 
