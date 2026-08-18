@@ -79,6 +79,10 @@ dsh plugin --profile web add /path/to/dsh-omi-voice
 
 ## 使用
 
+<p align="center">
+  <img src="docs/assets/reading.gif" width="480" alt="点读 → 暂停 → 继续 演示">
+</p>
+
 - **🔊 点读**；播放中再点 = **暂停**，再点 = **从暂停处继续**；点其它消息的 🔊 = 打断并读新的。
 - **只读最终回答**：工具执行日志、思考过程不会读；代码围栏、表格、纯图形（盒绘/ASCII）在请求前过滤，回复若只有这些内容，按钮呈禁用态并提示"没有可朗读的内容"。
 - 引擎未启动 / 未配置 Key 时，点击会给出明确提示（含去哪打开 Omi）。
