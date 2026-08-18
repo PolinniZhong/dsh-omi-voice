@@ -1,0 +1,5 @@
+# dsh-omi-voice bundle: mount the (minimal) Node half. The client UI loads
+# automatically via exports["./client"] + dsh.client.platform.
+- insert:
+    - id: omi-voice
+      name: 'dsh-omi-voice'
