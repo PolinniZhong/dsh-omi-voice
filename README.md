@@ -1,11 +1,17 @@
 <h1 align="center">dsh-omi-voice</h1>
 
-<p align="center">豆包音质 · 有温度的对话内朗读</p>
+<p align="center"><strong>沉浸式听朗读 · 豆包音质</strong></p>
+<p align="center">点一下 🔊，把 AI 回复用豆包的自然音色念给你听——无需复制，不做自动朗读</p>
 <p align="center">DeepSeek Harness 插件 · BYOK · MIT</p>
 
 [![Awesome DSH Plugin](https://awesome-dsh-plugin.com/badge.svg)](https://awesome-dsh-plugin.com)
 
-让 DeepSeek Harness（DSH）桌面端里的 AI 回复，用**豆包自然音色**读给你听——点一下 🔊 即可，无需复制，不做自动朗读。语音由你本机常驻的 Omi 引擎合成，**豆包 API Key 只留在你自己的钥匙串里（BYOK）**。
+让 DeepSeek Harness（DSH）桌面端里的 AI 回复，用**豆包自然音色**读给你听。语音由你本机常驻的 Omi 引擎合成，**豆包 API Key 只留在你自己的钥匙串里（BYOK）**。
+
+<p align="center">
+  <img src="docs/assets/idle.png" width="360" alt="未朗读状态">
+  <img src="docs/assets/reading.png" width="360" alt="朗读中状态">
+</p>
 
 ## 快速概览
 
@@ -22,7 +28,7 @@
 
 ## 三步开始朗读
 
-1. 安装插件并重启 DSH；打开 Omi 引擎（可在「设置 > 应用偏好 > 开机启动」设为常驻）。
+1. 安装插件 + 构建并打开 Omi 引擎（见下方「获取豆包 API Key」与「安装」）。
 2. 在 Omi 引擎设置页保存一次豆包 API Key。
 3. 在 DSH 对话里点 AI 回复旁的 🔊，即可朗读。
 
@@ -35,6 +41,24 @@ flowchart LR
     E --> F[本机扬声器播放]
 ```
 
+## 获取豆包 API Key（新手必读）
+
+本插件是 **BYOK（自带 Key）**：豆包语音由你自己的火山引擎账户按字符计费。三步拿到 Key：
+
+**第 1 步 · 找到「豆包语音」**：登录[火山引擎控制台](https://console.volcengine.com/)，进入「豆包语音」（语音技术）服务。
+
+<p align="center"><img src="docs/assets/doubao-1-find.png" width="480" alt="找到豆包语音"></p>
+
+**第 2 步 · 开通「语音合成 1.0」**：在产品列表里开通「语音合成大模型 / 语音合成 1.0」。
+
+<p align="center"><img src="docs/assets/doubao-2-enable.png" width="480" alt="开通豆包语音合成 1.0"></p>
+
+**第 3 步 · 创建 API Key**：创建 Access Key 时，**关联第 2 步开通的「语音合成 1.0」服务**；把得到的 API Key 填进 Omi 引擎「设置 > API Key」并保存。
+
+<p align="center"><img src="docs/assets/doubao-3-create-key.png" width="480" alt="创建 API Key"></p>
+
+> API Key 只保存进 Omi 引擎的 macOS Keychain，插件侧零 Key、不出本机。
+
 ## 安装
 
 ```bash
@@ -46,6 +70,8 @@ dsh plugin --profile web add "github:PolinniZhong/dsh-omi-voice#v0.1.2&path:/"
 ```bash
 dsh plugin --profile web add /path/to/dsh-omi-voice
 ```
+
+引擎（Omi DSH）构建见 [engine/README.md](engine/README.md)：`./engine/build/build-service.sh` 后 `ditto` 到 `~/Applications/Omi DSH.app`。
 
 ## 使用
 
@@ -70,7 +96,7 @@ dsh plugin --profile web add /path/to/dsh-omi-voice
 | 问题 | 回答 |
 |---|---|
 | 点 🔊 提示"未检测到 Omi DSH 引擎" | 打开应用「Omi DSH」（`~/Applications` 或 ⌘空格 搜 "Omi"），建议开「开机启动」 |
-| 提示"请先在 Omi 设置页配置豆包 API Key" | 打开「Omi DSH」设置，填一次 Key 并保存 |
+| 提示"请先在 Omi 设置页配置豆包 API Key" | 打开「Omi DSH」设置，按上文「获取豆包 API Key」填一次并保存 |
 | 按钮是灰的 / 点它没反应 | 这条回复没有可朗读的内容（纯代码/表格/图形），已自动过滤 |
 | 音色能换吗 | 在 Omi 设置页「音色 ID」改（当前插件不提供音色 UI） |
 | 支持 Windows 吗 | 暂不支持：Omi 引擎仅 macOS Apple Silicon |
