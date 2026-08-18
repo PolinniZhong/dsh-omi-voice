@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDisplayName</key>
+    <string>Omi dsh</string>
+    <key>CFBundleExecutable</key>
+    <string>ReadAloudService</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.wentuo.readaloud.service</string>
+    <key>CFBundleIconFile</key>
+    <string>OmiDSH</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>Omi dsh</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.0.0</string>
+    <key>CFBundleVersion</key>
+    <string>0.0.0</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+    <key>NSServices</key>
+    <array>
+        <dict>
+            <key>NSMessage</key>
+            <string>readAloud</string>
+            <key>NSPortName</key>
+            <string>ReadAloudService</string>
+            <key>NSMenuItem</key>
+            <dict>
+                <key>default</key>
+                <string>朗读选中内容</string>
+            </dict>
+            <key>NSSendTypes</key>
+            <array>
+                <string>public.utf8-plain-text</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>
