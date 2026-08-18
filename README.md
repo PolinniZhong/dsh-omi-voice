@@ -78,7 +78,7 @@ dsh plugin --profile web add /path/to/dsh-omi-voice
 
 ## 相关
 
-- 引擎：[PolinniZhong/omi-read-aloud](https://github.com/PolinniZhong/omi-read-aloud)
+- 引擎：[本仓库 `engine/`](engine/README.md)（Omi DSH 本地引擎，Swift 源码 + 构建脚本）
 - 生态：[awesome-dsh-plugin](https://github.com/beancookie/awesome-dsh-plugin)
 
 ## License
