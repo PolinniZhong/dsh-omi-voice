@@ -1,0 +1,31 @@
+{
+  "name": "dsh-omi-voice",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness 对话内朗读：豆包音质 · 点读/自动朗读 · 豆包 Key 只留在 Omi 引擎（BYOK）",
+  "type": "module",
+  "main": "./host/lib/index.js",
+  "exports": {
+    ".": "./host/lib/index.js",
+    "./client": "./client/lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "host",
+    "client",
+    "cordis.patch.yml",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "dependencies": {},
+  "license": "MIT"
+}
