@@ -1,5 +1,9 @@
 <h1 align="center">dsh-omi-voice</h1>
 
+<p align="center">
+  <img src="docs/assets/logo.png" width="140" alt="dsh-omi-voice 鲸鱼 Logo">
+</p>
+
 <p align="center"><strong>沉浸式听朗读 · 豆包音质</strong></p>
 <p align="center">点一下 🔊，把 AI 回复用豆包的自然音色念给你听——无需复制，不做自动朗读</p>
 <p align="center">DeepSeek Harness 插件 · BYOK · MIT</p>
