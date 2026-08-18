@@ -1,6 +1,6 @@
 {
   "name": "dsh-omi-voice",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DeepSeek Harness 对话内朗读：豆包音质 · 点读/自动朗读 · 豆包 Key 只留在 Omi 引擎（BYOK）",
   "type": "module",
   "main": "./host/lib/index.js",
