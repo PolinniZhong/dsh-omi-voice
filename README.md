@@ -115,6 +115,15 @@ dsh plugin --profile web add /path/to/dsh-omi-voice
 - 引擎：[本仓库 `engine/`](engine/README.md)（Omi DSH 本地引擎，Swift 源码 + 构建脚本）
 - 生态：[awesome-dsh-plugin](https://github.com/beancookie/awesome-dsh-plugin)
 
+## 项目文档
+
+- [AGENTS.md](AGENTS.md) — 给 AI 编码代理的项目说明（Codex 约定）
+- [docs/DESIGN.md](docs/DESIGN.md) — 架构与设计
+- [docs/DECISIONS.md](docs/DECISIONS.md) — 设计决策记录
+- [docs/MEMORY.md](docs/MEMORY.md) — 长期知识库（坑/结论）
+- [docs/HANDOFF.md](docs/HANDOFF.md) — 交接与续作
+- [docs/API.md](docs/API.md) — 本地协议
+
 ## License
 
 MIT
