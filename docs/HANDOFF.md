@@ -11,12 +11,14 @@
 
 ## 待办（按优先级）
 
-1. **等 PR 合并**：beancookie/awesome-dsh-plugin #75、libukai #41 待维护者合并。
+1. **PR 状态**：
+   - ✅ **beancookie/awesome-dsh-plugin #75 已合并（2026-08-19）**——插件已进 DSH 插件主清单。
    - ✅ fendouai #20 已收录：PR 被关闭但内容已由维护者并入 main（commit `ada8503`，分类 `ui`），见 `data/plugins.json`。
+   - ⏳ libukai #41 待维护者合并（等对方，无需操作）。
 2. **官方帖子**：deepseek-ai/deepseek-harness discussions #3084 已发（含 GIF 演示 + "轻量·类原生"定位），可回复互动提升可见度。
 3. **推广文章**：用户自写（公众号/V2EX/掘金），引用 README 截图/GIF + 官方帖子链接。
 4. **可选增强（v1.1）**：语速 UI、跳过段落、端口配置 UI、鉴权 token、Windows 引擎。
-5. **fork 清理**：PR 合并后删除账号下 `PolinniZhong/awesome-deepseek-harness*` 等临时 fork。
+5. **fork 清理**：等 libukai #41 合并后，删除账号下 `PolinniZhong/awesome-deepseek-harness*` 等临时 fork（fendouai 的 fork 现在即可删）。
 
 ## 如何继续开发
 
