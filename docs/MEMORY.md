@@ -2,6 +2,13 @@
 
 > 记录跨版本仍有效的坑与已验证结论（对应 Omi 的 `MEMORY.md`）。倒序追加。
 
+## 插件列表收录（awesome 生态）
+
+- **fendouai/awesome-deepseek-harness 是 data-driven 列表**：README 与资源页由 `data/*.json` 自动生成，**更新条目走 `data/plugins.json` 提 PR，不手改 README**（维护者规则）。
+- **已收录状态（2026-08-18）**：fendouai 列表 PR #20 被关闭但内容已由维护者手动并入 main（commit `ada8503`），条目在 `data/plugins.json`（分类 `ui`，能力 `ui`+`multimodal`，英文/中文描述均准确），并生成了专属资源页 `docs/en/resources/dsh-omi-voice.md`。
+- **PR 关闭 ≠ 内容没收录**：data-driven 列表的维护者常"关闭 PR + 手动并入自己的批量提交"，看 commit 是否含条目，别只看 PR 状态。
+- 同一维护者生态注意：**同名仓库 fork 会撞名**，用 `gh repo fork owner/repo --fork-name 自定义名`。
+
 ## 发布与工具链
 
 - **本机 git push 被限速/拦截**：git 上传到 GitHub 会超时（"Recv failure / too slow"），但 `gh api` / `curl` / Contents API 正常。发布统一走：
