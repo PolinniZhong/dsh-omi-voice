@@ -20,7 +20,9 @@
 2. **官方帖子**：deepseek-ai/deepseek-harness discussions #3084 已发（含 GIF 演示 + "轻量·类原生"定位），可回复互动提升可见度。
 3. **推广文章**：✅ **已发布（2026-08-25）**——小红书/公众号/知乎（用户自写，带来主要流量，仓库 2★ → 46★）。PR #3148 合并后可发一篇"入选官方清单"的更新文章做第二波。 
 4. **可选增强（v1.1）**：语速 UI、跳过段落、端口配置 UI、鉴权 token、Windows 引擎。
-5. **fork 清理**：可删 `PolinniZhong/awesome-dsh-plugin`（beancookie 已合并）、`awesome-deepseek-harness-fendouai`（fendouai 已处理）、`awesome-deepseek-harness-1`（Dominic 未用）；**保留** `awesome-deepseek-harness`（libukai #41 未合并）与 `awesome-dsh-plugin-org`（PR #3148 未合并）。
+5. **fork 清理**：✅ **已完成（2026-08-25，用户网页手动删）**——已删 `awesome-dsh-plugin`（beancookie）、`awesome-deepseek-harness-fendouai`（fendouai）、`awesome-deepseek-harness-dominic`（Dominic，注意真实 fork 名是 `-dominic` 而非 `-1`）；**保留** `awesome-deepseek-harness`（libukai #41 未合并）与 `awesome-dsh-plugin-org`（PR #3148 未合并）。
+
+> 注：2026-08-25 工作区已重命名 `首次开箱` → `Omi-DSH 端到端`（桌面端 profile 的 link 指向与新符号链接已同步，重启桌面端后生效）；旧开发副本文件夹 `Omi-dsh 端到端版本` 已删除（v0.2.0 原版在别处、代码在 engine/，零损失）。
 
 ## 如何继续开发
 

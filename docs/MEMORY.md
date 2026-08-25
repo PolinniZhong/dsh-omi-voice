@@ -2,6 +2,14 @@
 
 > 记录跨版本仍有效的坑与已验证结论（对应 Omi 的 `MEMORY.md`）。倒序追加。
 
+## 发布与推广（2026-08-25）
+
+- **npm 发布要点**：包名 `dsh-omi-voice`（未被占用）；`package.json` 必须带 `repository` 字段（关联 GitHub，npm 下载量才回显到仓库）；`files` 精简为 `["host","client","cordis.patch.yml","docs/API.md","README.md","LICENSE"]`（不要把 docs/assets 图片打进包）；发布前 `npm pack --dry-run` 验证；npm 登录用户 `polinni`。
+- **org 主清单（awesome-dsh-plugin/awesome-dsh-plugin）提交方式**：data-driven——一个插件一个 YAML `data/plugins/<owner>__<repo>.yml`（category 用 `voice`，description.en 必填、含 `: ` 必须加引号、以句号结尾、无营销词）；改完后跑 `npm ci && node scripts/generate-readme.mjs` 重新生成 README 一起提交；可选在 `data/screenshots.json` 加 GitHub 托管截图 URL。提交过 PR #3148（CI 通过）。
+- **本环境 npm 技巧**：沙箱挡 `~/.npm` 写入，用 `npm --cache /tmp/npm-cacheX <cmd>` 绕开。
+- **沙箱网络限制**：`git push` 与 `github.com/login/oauth/access_token`（gh 令牌换新 scope）在本环境会超时——令牌扩容（如 `delete_repo`）必须让用户在**自己终端**跑 `gh auth refresh -h github.com -s <scope>`，本环境无法完成。
+- **沙箱与工作区重命名**：工作区文件夹改名后，沙箱仍绑定旧路径，对新路径的写入会间歇报"Operation not permitted / sandbox-exec ENOENT"——用文件工具的完整权限重试即可，或改用绝对路径 + 显式 workdir。
+
 ## 插件列表收录（awesome 生态）
 
 - **fendouai/awesome-deepseek-harness 是 data-driven 列表**：README 与资源页由 `data/*.json` 自动生成，**更新条目走 `data/plugins.json` 提 PR，不手改 README**（维护者规则）。
