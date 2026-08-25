@@ -69,6 +69,12 @@ flowchart LR
 dsh plugin --profile web add "github:PolinniZhong/dsh-omi-voice#v0.1.2&path:/"
 ```
 
+已发布 npm，也可直接装（更短）：
+
+```bash
+dsh plugin --profile web add dsh-omi-voice
+```
+
 本地开发可直接装目录：
 
 ```bash

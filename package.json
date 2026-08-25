@@ -1,7 +1,7 @@
 {
   "name": "dsh-omi-voice",
   "version": "0.1.2",
-  "description": "DeepSeek Harness 对话内朗读：豆包音质 · 点读/自动朗读 · 豆包 Key 只留在 Omi 引擎（BYOK）",
+  "description": "DeepSeek Harness 对话内朗读：豆包音质 · 点读/暂停/继续 · 豆包 Key 只留在 Omi 引擎（BYOK）",
   "type": "module",
   "main": "./host/lib/index.js",
   "exports": {
@@ -14,10 +14,14 @@
     "host",
     "client",
     "cordis.patch.yml",
-    "docs",
+    "docs/API.md",
     "README.md",
     "LICENSE"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolinniZhong/dsh-omi-voice.git"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

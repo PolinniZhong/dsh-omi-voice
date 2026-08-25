@@ -7,6 +7,7 @@
 - **图标融入 DSH**：未朗读=喇叭（无背景、正圆悬浮，与复制/点赞一致）；朗读中=4 竖条循环跳动；无可读文本=禁用态
 - **成本加固**：引擎进程内 LRU 缓存（3 条/5MB，纯内存）+ 同文本 3 秒去重 + 任意朗读 300ms 节流
 - **协议文档**：docs/API.md 同步新增 pause/resume 端点与状态字段
+- **发布 npm**：`dsh-omi-voice@0.1.2` 已发布至 npm registry（`dsh plugin add dsh-omi-voice` 可直接安装），`repository` 字段关联 GitHub 仓库
 
 ## [0.1.1] - 2026-08-18
 
