@@ -9,6 +9,8 @@
 <p align="center">DeepSeek Harness 插件 · BYOK · MIT</p>
 
 [![Awesome DSH Plugin](https://awesome-dsh-plugin.com/badge.svg)](https://awesome-dsh-plugin.com)
+[![dsh.so security](https://www.dsh.so/badge/dsh-omi-voice.svg)](https://www.dsh.so/artifact/dsh-omi-voice)
+[![dsh.so install](https://www.dsh.so/badge/install/dsh-omi-voice.svg)](https://www.dsh.so/artifact/dsh-omi-voice)
 
 让 DeepSeek Harness（DSH）桌面端里的 AI 回复，用**豆包自然音色**读给你听。语音由你本机常驻的 Omi 引擎合成，**豆包 API Key 只留在你自己的钥匙串里（BYOK）**。
 
