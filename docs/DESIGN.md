@@ -60,3 +60,11 @@
 - 引擎仅 macOS（Apple Silicon）。插件跨任何 `dsh web`。
 - 版本：插件 `package.json` 与引擎 `engine/VERSION` 必须一致。
 - 协议改动三处同步：API.md → LocalTTSService → client.js。
+
+## 8. 本地化 / 国际化
+
+- 引擎 UI **自动跟随系统语言**：`main.swift` 用 `NSLocalizedString("中文串", comment: "")`（中文串即 key），配套 `Resources/en.lproj/Localizable.strings`（54 条 中文→英文）。
+- **中文自动回退**：未命中的 key 返回原中文串，因此中文系统**无需** `zh-Hans.lproj`；英文系统命中 `en.lproj` 显示英文。
+- 构建：`engine/build/build-service.sh` 复制 `en.lproj` 进 App 包 `Contents/Resources`。
+- 范围：用户可见 UI（设置面板/状态/菜单/按钮/错误提示/无障碍标签）；日志（`serviceLog`）、开发诊断保持中文。
+- **坑**：含插值（`\(...)`）的字符串不能用"字面量作 key"（会把展开后的值当 key，查不到），保留原样或改用 `String(format:)`。

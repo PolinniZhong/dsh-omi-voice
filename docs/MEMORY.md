@@ -56,3 +56,11 @@
 
 - 桌面端 profile 用 `dsh plugin --profile web add <本地绝对路径>` 会以 `link:` 方式装入 → 改 client.js 无需重装，重启桌面端即生效。
 - 桌面端打包的 dsh CLI 入口是 `node_modules/@deepseek-ai/dsh/lib/bin.js`（不是 `.bin/dsh`，后者因目录结构报错）；pnpm 用桌面端自带的 `dependencies/pnpm/bin/pnpm.cjs`。
+
+## 本地化（引擎 UI）
+
+- **"中文串作 key"**：`NSLocalizedString("中文", comment: "")` + `en.lproj/Localizable.strings`（中文→英文）。中文系统自动回退（不命中的 key 返回 key 本身=中文），**只需 en.lproj、无需 zh-Hans.lproj**。
+- **含插值字符串不能这样翻**：`"全局快捷键...（\(status)）"` 的 `\(...)` 会先求值再当 key → 查不到。这类保留原样或改用 `String(format:)`。用脚本包裹时正则跳过含 `\` 的字符串即可。
+- **build-service.sh 必须复制 en.lproj**：`cp -R "$ROOT/Resources/en.lproj" "$APP/Contents/Resources/"`，否则 bundle 里没语言资源、回退中文。
+- **验证**：`Bundle(path: "<.app 路径>")` + `UserDefaults.set(["en"], forKey: "AppleLanguages")` + `bundle.localizedString(forKey:value:table:)`（注意用 App 的 Bundle，不是 CLI 脚本的 `Bundle.main`）。
+- 文档国际化：`README.en.md` / `AGENTS.en.md` / `engine/README.en.md`，中文原版顶部加 `中文 | [English](...)` 切换链接。

@@ -2,11 +2,12 @@
 
 > 项目当前状态 + 如何续作（对应 Omi 的 `HANDOFF.md`）。接手前先读本文件与 `AGENTS.md`。
 
-## 当前状态（2026-08-18）
+## 当前状态（2026-08-18，更新至 2026-08-27）
 
 - **版本**：v0.1.2（插件 package.json 与引擎 engine/VERSION 已统一）。
 - **已发布**：GitHub 公开仓库 `PolinniZhong/dsh-omi-voice`，含插件（根）+ 引擎（engine/）+ 文档 + 截图/GIF + Release。
 - **功能已落地并验证**：点读/暂停/继续/停止、失败原因回传、只读最终回答、代码/表格/图形过滤、LRU 缓存、去重/节流、BYOK。
+- **界面国际化（2026-08-27）**：引擎 UI 自动跟随系统语言（NSLocalizedString + `en.lproj`），英文系统→英文、中文系统→中文；文档双语（README/AGENTS/engine README + 切换链接）。**已同步 GitHub**（main.swift + en.lproj + build-service.sh）。
 - **本机运行态**：引擎安装于 `~/Applications/Omi DSH.app`（8765 服务）；桌面端以 `link:` 装入插件。
 
 ## 待办（按优先级）
