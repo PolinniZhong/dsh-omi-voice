@@ -1,3 +1,5 @@
+中文 | [English](README.en.md)
+
 <h1 align="center">dsh-omi-voice</h1>
 
 <p align="center">
