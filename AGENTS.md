@@ -1,3 +1,5 @@
+中文 | [English](AGENTS.en.md)
+
 # AGENTS.md — dsh-omi-voice
 
 > 给 AI 编码代理（Codex / Claude Code / DSH 等）的项目说明。修改本仓库前请先读本文件。
