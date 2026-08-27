@@ -8,6 +8,7 @@
 - **org 主清单（awesome-dsh-plugin/awesome-dsh-plugin）提交方式**：data-driven——一个插件一个 YAML `data/plugins/<owner>__<repo>.yml`（category 用 `voice`，description.en 必填、含 `: ` 必须加引号、以句号结尾、无营销词）；改完后跑 `npm ci && node scripts/generate-readme.mjs` 重新生成 README 一起提交；可选在 `data/screenshots.json` 加 GitHub 托管截图 URL。提交过 PR #3148（CI 通过）。
 - **⚠️ org 清单 PR 会反复冲突（重要）**：上游太活跃（12K★，别人 PR 不断被合并），生成的 README/数据文件每次都撞。**修复流程（每次 2 分钟）**：① 拉最新上游 tarball（`codeload.github.com/.../tar.gz/refs/heads/main`）② 重新写入 YAML + screenshots.json 条目 ③ `npm ci && node scripts/generate-readme.mjs` 重生成 README ④ git data API 以"最新上游 sha 为父提交 + 上游 tree 为 base"重建 fork 分支并 `force:true` 更新 → PR 变为"最新上游 + 我的改动"，天然无冲突。用户选定的方案：**每次报冲突就发我重跑**。
 - **截图新规则（维护者 fkysly 2026-08-26 要求，重要）**：**不要改上游 `data/screenshots.json`**（所有人共用、108 个 PR 抢同一个文件必冲突）——改为在**插件仓库根目录放 `screenshots.json`**（相对路径指向仓库内图片，如 `docs/assets/reading.png`），下一次构建自动生效；换截图只推自己仓库即可。我们已照做：`dsh-omi-voice/screenshots.json`。PR #3148 最终只含 YAML + 两个生成的 README（已 CLEAN、CI 绿，等维护者合并）。
+- 修复 PR 冲突时注意：python urllib 可能因 SSL 证书报错（framework Python 无 certifi），改用 **`gh api --input <json文件>`**（先 printf 出 tree/commit 的 JSON body）即可；`gh api -F` 传 JSON 数组不可靠。
 - **本环境 npm 技巧**：沙箱挡 `~/.npm` 写入，用 `npm --cache /tmp/npm-cacheX <cmd>` 绕开。
 - **沙箱网络限制**：`git push` 与 `github.com/login/oauth/access_token`（gh 令牌换新 scope）在本环境会超时——令牌扩容（如 `delete_repo`）必须让用户在**自己终端**跑 `gh auth refresh -h github.com -s <scope>`，本环境无法完成。
 - **沙箱与工作区重命名**：工作区文件夹改名后，沙箱仍绑定旧路径，对新路径的写入会间歇报"Operation not permitted / sandbox-exec ENOENT"——用文件工具的完整权限重试即可，或改用绝对路径 + 显式 workdir。
