@@ -21,6 +21,7 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$ROOT/Resources/ReadAloudService-Info.plist" "$APP/Contents/Info.plist"
 cp "$ROOT/Resources/Omi_logo.svg" "$APP/Contents/Resources/Omi_logo.svg"
 cp "$ROOT/Resources/OmiDSH.icns" "$APP/Contents/Resources/OmiDSH.icns"
+cp -R "$ROOT/Resources/en.lproj" "$APP/Contents/Resources/"
 /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $OMI_VERSION" "$APP/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $OMI_VERSION" "$APP/Contents/Info.plist"
 

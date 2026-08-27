@@ -143,10 +143,10 @@ private final class DiscreteRateSlider: NSControl {
         self.target = target
         self.action = action
         focusRingType = .exterior
-        toolTip = "1.0× 到 2.0×，每次调整 0.1×"
+        toolTip = NSLocalizedString("1.0× 到 2.0×，每次调整 0.1×", comment: "")
         setAccessibilityElement(true)
         setAccessibilityRole(.slider)
-        setAccessibilityLabel("朗读语速")
+        setAccessibilityLabel(NSLocalizedString("朗读语速", comment: ""))
         updateAccessibility()
     }
 
@@ -304,7 +304,7 @@ private final class CopyableStatusTextView: NSTextView {
     override func menu(for event: NSEvent) -> NSMenu? {
         let menu = NSMenu()
         let copyItem = NSMenuItem(
-            title: "复制完整信息",
+            title: NSLocalizedString("复制完整信息", comment: ""),
             action: #selector(copyFullTextFromMenu),
             keyEquivalent: ""
         )
@@ -456,9 +456,9 @@ enum RemoteSpeakError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidText:
-            return "文本为空或没有可朗读的内容"
+            return NSLocalizedString("文本为空或没有可朗读的内容", comment: "")
         case .keyNotConfigured:
-            return "请先在 Omi 设置页配置豆包 API Key"
+            return NSLocalizedString("请先在 Omi 设置页配置豆包 API Key", comment: "")
         }
     }
 }
@@ -510,7 +510,7 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
     func readAloud(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
         guard let text = pboard.string(forType: .string), !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             serviceLog("service-request rejected: empty-text")
-            error.pointee = "没有可朗读的选中文本。" as NSString
+            error.pointee = NSLocalizedString("没有可朗读的选中文本。", comment: "") as NSString
             return
         }
         enqueue(text, html: pboard.string(forType: .html), source: "service")
@@ -531,7 +531,7 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
                 serviceLog("clipboard-request rejected: empty-text active-session-preserved")
                 return
             }
-            updateReadingPresentation(.waiting, message: "请先复制选中的文本")
+            updateReadingPresentation(.waiting, message: NSLocalizedString("请先复制选中的文本", comment: ""))
             return
         }
         enqueue(text, html: pasteboard.string(forType: .html), source: "clipboard")
@@ -564,8 +564,8 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
             updateReadingPresentation(
                 .waiting,
                 message: prepared.text.isEmpty && prepared.removedTableBlocks > 0
-                    ? "表格内容暂不支持朗读"
-                    : "没有可朗读的文字内容"
+                    ? NSLocalizedString("表格内容暂不支持朗读", comment: "")
+                    : NSLocalizedString("没有可朗读的文字内容", comment: "")
             )
             serviceLog("request rejected: no-readable-text")
             return 0
@@ -602,7 +602,7 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
 
         let content = NSView(frame: NSRect(x: 0, y: 0, width: 300, height: 140))
         let status = CopyableStatusTextView(frame: .zero)
-        status.string = "正在准备朗读"
+        status.string = NSLocalizedString("正在准备朗读", comment: "")
         status.font = .systemFont(ofSize: NSFont.systemFontSize)
         status.textColor = .secondaryLabelColor
         status.isSelectable = true
@@ -619,9 +619,9 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         status.textContainer?.heightTracksTextView = true
         status.isHorizontallyResizable = false
         status.isVerticallyResizable = false
-        status.toolTip = "点入后按 ⌘C，或右键复制完整状态或错误信息"
-        status.setAccessibilityLabel("朗读状态")
-        status.setAccessibilityHelp("点入后按 Command C，或右键复制完整状态或错误信息")
+        status.toolTip = NSLocalizedString("点入后按 ⌘C，或右键复制完整状态或错误信息", comment: "")
+        status.setAccessibilityLabel(NSLocalizedString("朗读状态", comment: ""))
+        status.setAccessibilityHelp(NSLocalizedString("点入后按 Command C，或右键复制完整状态或错误信息", comment: ""))
         status.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         status.setContentHuggingPriority(.defaultLow, for: .horizontal)
         statusLabel = status
@@ -629,7 +629,7 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         let playbackButton = PlaybackButton(
             image: NSImage(
                 systemSymbolName: "speaker.wave.2.fill",
-                accessibilityDescription: "开始朗读"
+                accessibilityDescription: NSLocalizedString("开始朗读", comment: "")
             ) ?? NSImage(),
             target: self,
             action: #selector(togglePlayback)
@@ -637,8 +637,8 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         playbackButton.bezelStyle = .inline
         playbackButton.isBordered = false
         playbackButton.imageScaling = .scaleProportionallyDown
-        playbackButton.toolTip = "开始朗读"
-        playbackButton.setAccessibilityLabel("开始朗读")
+        playbackButton.toolTip = NSLocalizedString("开始朗读", comment: "")
+        playbackButton.setAccessibilityLabel(NSLocalizedString("开始朗读", comment: ""))
         playbackButton.isEnabled = false
         playbackButton.translatesAutoresizingMaskIntoConstraints = false
         self.playbackButton = playbackButton
@@ -654,7 +654,7 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         settingsStack.isHidden = true
         self.settingsStack = settingsStack
 
-        let speedTitle = NSTextField(labelWithString: "语速")
+        let speedTitle = NSTextField(labelWithString: NSLocalizedString("语速", comment: ""))
         speedTitle.font = .systemFont(ofSize: 11)
         speedTitle.textColor = .secondaryLabelColor
         let speedValue = NSTextField(labelWithString: rateText(currentRate))
@@ -744,13 +744,13 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
     private func makeReadingSettingsStack() -> NSStackView {
         let modelField = NSTextField(string: providerSettings.model)
         modelField.placeholderString = ReadAloudProviderSettings.defaultModel
-        modelField.toolTip = "产品配置标识；当前 V3 服务实际由 Resource ID 选择"
-        modelField.setAccessibilityHelp("产品配置标识；当前 V3 服务实际由 Resource ID 选择")
+        modelField.toolTip = NSLocalizedString("产品配置标识；当前 V3 服务实际由 Resource ID 选择", comment: "")
+        modelField.setAccessibilityHelp(NSLocalizedString("产品配置标识；当前 V3 服务实际由 Resource ID 选择", comment: ""))
         self.modelField = modelField
 
         let apiKeyField = NSSecureTextField(string: "")
-        apiKeyField.placeholderString = "输入新 Key；留空则保持现有 Key"
-        apiKeyField.toolTip = "已保存的 API Key 不会回显"
+        apiKeyField.placeholderString = NSLocalizedString("输入新 Key；留空则保持现有 Key", comment: "")
+        apiKeyField.toolTip = NSLocalizedString("已保存的 API Key 不会回显", comment: "")
         self.apiKeyField = apiKeyField
 
         let resourceIDField = NSTextField(string: providerSettings.resourceID)
@@ -761,17 +761,17 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         voiceIDField.placeholderString = ReadAloudProviderSettings.defaultVoiceID
         self.voiceIDField = voiceIDField
 
-        let state = NSTextField(labelWithString: "API Key 不回显")
+        let state = NSTextField(labelWithString: NSLocalizedString("API Key 不回显", comment: ""))
         state.font = .systemFont(ofSize: 11)
         state.textColor = .secondaryLabelColor
         state.lineBreakMode = .byTruncatingTail
         state.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         settingsStateLabel = state
 
-        let saveButton = NSButton(title: "保存", target: self, action: #selector(saveSettings))
+        let saveButton = NSButton(title: NSLocalizedString("保存", comment: ""), target: self, action: #selector(saveSettings))
         saveButton.bezelStyle = .rounded
         saveButton.controlSize = .regular
-        saveButton.setAccessibilityLabel("保存朗读配置")
+        saveButton.setAccessibilityLabel(NSLocalizedString("保存朗读配置", comment: ""))
 
         let actionRow = NSStackView(views: [state, NSView(), saveButton])
         actionRow.orientation = .horizontal
@@ -779,27 +779,27 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         actionRow.spacing = 8
         actionRow.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
-        let modelRow = makeSettingsRow(title: "模型", field: modelField)
+        let modelRow = makeSettingsRow(title: NSLocalizedString("模型", comment: ""), field: modelField)
         let apiKeyRow = makeSettingsRow(title: "API Key", field: apiKeyField)
         let resourceIDRow = makeSettingsRow(title: "Resource ID", field: resourceIDField)
-        let voiceIDRow = makeSettingsRow(title: "音色 ID", field: voiceIDField)
+        let voiceIDRow = makeSettingsRow(title: NSLocalizedString("音色 ID", comment: ""), field: voiceIDField)
         let divider = NSBox()
         divider.boxType = .separator
 
-        let preferencesTitle = NSTextField(labelWithString: "应用偏好")
+        let preferencesTitle = NSTextField(labelWithString: NSLocalizedString("应用偏好", comment: ""))
         preferencesTitle.font = .systemFont(ofSize: 11)
         preferencesTitle.textColor = .secondaryLabelColor
 
-        let launchAtLoginLabel = NSTextField(labelWithString: "开机启动")
+        let launchAtLoginLabel = NSTextField(labelWithString: NSLocalizedString("开机启动", comment: ""))
         launchAtLoginLabel.font = .systemFont(ofSize: 13)
-        launchAtLoginLabel.setAccessibilityLabel("开机启动")
+        launchAtLoginLabel.setAccessibilityLabel(NSLocalizedString("开机启动", comment: ""))
 
         let launchAtLoginSwitch = NSSwitch()
         launchAtLoginSwitch.controlSize = .small
         launchAtLoginSwitch.target = self
         launchAtLoginSwitch.action = #selector(launchAtLoginChanged(_:))
-        launchAtLoginSwitch.setAccessibilityLabel("开机启动")
-        launchAtLoginSwitch.setAccessibilityHelp("登录 Mac 后自动启动 Omi")
+        launchAtLoginSwitch.setAccessibilityLabel(NSLocalizedString("开机启动", comment: ""))
+        launchAtLoginSwitch.setAccessibilityHelp(NSLocalizedString("登录 Mac 后自动启动 Omi", comment: ""))
         self.launchAtLoginSwitch = launchAtLoginSwitch
         refreshLaunchAtLoginSwitch()
 
@@ -842,14 +842,14 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
     private func installSettingsButton(on window: NSWindow) {
         let symbol = NSImage(
             systemSymbolName: "gearshape",
-            accessibilityDescription: "打开设置"
+            accessibilityDescription: NSLocalizedString("打开设置", comment: "")
         )
         let button = NSButton(image: symbol ?? NSImage(), target: self, action: #selector(toggleSettings))
         button.bezelStyle = .inline
         button.isBordered = false
-        button.toolTip = "打开设置"
+        button.toolTip = NSLocalizedString("打开设置", comment: "")
         button.setButtonType(.toggle)
-        button.setAccessibilityLabel("打开设置")
+        button.setAccessibilityLabel(NSLocalizedString("打开设置", comment: ""))
         button.translatesAutoresizingMaskIntoConstraints = false
 
         let container = NSView(frame: NSRect(x: 0, y: 0, width: 34, height: 28))
@@ -873,8 +873,8 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         isSettingsVisible.toggle()
         settingsStack?.isHidden = !isSettingsVisible
         settingsButton?.state = isSettingsVisible ? .on : .off
-        settingsButton?.toolTip = isSettingsVisible ? "关闭设置" : "打开设置"
-        settingsButton?.setAccessibilityLabel(isSettingsVisible ? "关闭设置" : "打开设置")
+        settingsButton?.toolTip = isSettingsVisible ? NSLocalizedString("关闭设置", comment: "") : NSLocalizedString("打开设置", comment: "")
+        settingsButton?.setAccessibilityLabel(isSettingsVisible ? NSLocalizedString("关闭设置", comment: "") : NSLocalizedString("打开设置", comment: ""))
         if isSettingsVisible {
             refreshSettingsFields()
         } else {
@@ -897,7 +897,7 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         resourceIDField?.stringValue = providerSettings.resourceID
         voiceIDField?.stringValue = providerSettings.voiceID
         apiKeyField?.stringValue = ""
-        settingsStateLabel?.stringValue = "API Key 不回显；留空保持不变"
+        settingsStateLabel?.stringValue = NSLocalizedString("API Key 不回显；留空保持不变", comment: "")
         settingsStateLabel?.textColor = .secondaryLabelColor
         refreshLaunchAtLoginSwitch()
     }
@@ -936,10 +936,10 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
 
     private func presentLaunchAtLoginApproval() {
         let alert = NSAlert()
-        alert.messageText = "请允许 Omi 开机启动"
-        alert.informativeText = "请在系统设置的“登录项”中允许 Omi。"
-        alert.addButton(withTitle: "打开系统设置")
-        alert.addButton(withTitle: "稍后")
+        alert.messageText = NSLocalizedString("请允许 Omi 开机启动", comment: "")
+        alert.informativeText = NSLocalizedString("请在系统设置的“登录项”中允许 Omi。", comment: "")
+        alert.addButton(withTitle: NSLocalizedString("打开系统设置", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("稍后", comment: ""))
         if alert.runModal() == .alertFirstButtonReturn {
             SMAppService.openSystemSettingsLoginItems()
         }
@@ -947,9 +947,9 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
 
     private func presentLaunchAtLoginFailure(_ error: Error) {
         let alert = NSAlert()
-        alert.messageText = "无法更新开机启动"
+        alert.messageText = NSLocalizedString("无法更新开机启动", comment: "")
         alert.informativeText = userFacingErrorMessage(error)
-        alert.addButton(withTitle: "好")
+        alert.addButton(withTitle: NSLocalizedString("好", comment: ""))
         alert.runModal()
     }
 
@@ -958,7 +958,7 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
         let resourceID = normalized(resourceIDField?.stringValue)
         let voiceID = normalized(voiceIDField?.stringValue)
         guard let model, let resourceID, let voiceID else {
-            settingsStateLabel?.stringValue = "模型、Resource ID 和音色 ID 不能为空"
+            settingsStateLabel?.stringValue = NSLocalizedString("模型、Resource ID 和音色 ID 不能为空", comment: "")
             settingsStateLabel?.textColor = .systemRed
             return
         }
@@ -979,10 +979,10 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
             apiKeyField?.stringValue = ""
 
             settingsStateLabel?.stringValue = replacementKey == nil
-                ? "配置已保存；API Key 保持不变"
-                : "配置已保存；API Key 已更新且不回显"
+                ? NSLocalizedString("配置已保存；API Key 保持不变", comment: "")
+                : NSLocalizedString("配置已保存；API Key 已更新且不回显", comment: "")
             settingsStateLabel?.textColor = .secondaryLabelColor
-            statusLabel?.string = "配置已保存"
+            statusLabel?.string = NSLocalizedString("配置已保存", comment: "")
             serviceLog("provider-settings saved keyUpdated=\(replacementKey != nil)")
         } catch {
             settingsStateLabel?.stringValue = userFacingErrorMessage(error)
@@ -1148,46 +1148,46 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
 
         switch state {
         case .waiting:
-            statusLabel?.string = message ?? "等待朗读"
+            statusLabel?.string = message ?? NSLocalizedString("等待朗读", comment: "")
             symbolName = "speaker.wave.2.fill"
             symbolTint = .controlAccentColor
-            actionLabel = "开始朗读"
+            actionLabel = NSLocalizedString("开始朗读", comment: "")
             isButtonEnabled = !currentText.isEmpty
         case .preparing:
-            statusLabel?.string = "正在准备朗读"
+            statusLabel?.string = NSLocalizedString("正在准备朗读", comment: "")
             symbolName = "speaker.slash"
             symbolTint = .labelColor
-            actionLabel = "停止朗读"
+            actionLabel = NSLocalizedString("停止朗读", comment: "")
             isButtonEnabled = true
         case .playing:
-            statusLabel?.string = "朗读中"
+            statusLabel?.string = NSLocalizedString("朗读中", comment: "")
             symbolName = "speaker.slash"
             symbolTint = .controlAccentColor
-            actionLabel = "暂停朗读"
+            actionLabel = NSLocalizedString("暂停朗读", comment: "")
             isButtonEnabled = true
         case .paused:
-            statusLabel?.string = "已暂停朗读"
+            statusLabel?.string = NSLocalizedString("已暂停朗读", comment: "")
             symbolName = "speaker.wave.2"
             symbolTint = .secondaryLabelColor
-            actionLabel = "继续朗读"
+            actionLabel = NSLocalizedString("继续朗读", comment: "")
             isButtonEnabled = true
         case .completed:
-            statusLabel?.string = "朗读完成"
+            statusLabel?.string = NSLocalizedString("朗读完成", comment: "")
             symbolName = "speaker.wave.2.fill"
             symbolTint = .controlAccentColor
-            actionLabel = "重新朗读"
+            actionLabel = NSLocalizedString("重新朗读", comment: "")
             isButtonEnabled = !currentText.isEmpty
         case .stopped:
-            statusLabel?.string = "已停止朗读"
+            statusLabel?.string = NSLocalizedString("已停止朗读", comment: "")
             symbolName = "speaker.wave.2.fill"
             symbolTint = .controlAccentColor
-            actionLabel = "重新朗读"
+            actionLabel = NSLocalizedString("重新朗读", comment: "")
             isButtonEnabled = !currentText.isEmpty
         case .failed:
-            statusLabel?.string = message ?? "朗读失败"
+            statusLabel?.string = message ?? NSLocalizedString("朗读失败", comment: "")
             symbolName = "speaker.wave.2.fill"
             symbolTint = .controlAccentColor
-            actionLabel = "重新朗读"
+            actionLabel = NSLocalizedString("重新朗读", comment: "")
             isButtonEnabled = !currentText.isEmpty
         }
 
@@ -1261,8 +1261,8 @@ final class ReadAloudServiceProvider: NSObject, NSWindowDelegate {
     private func setRateControlEnabled(_ enabled: Bool) {
         speedSlider?.isEnabled = enabled
         speedSlider?.toolTip = enabled
-            ? "1.0× 到 2.0×，每次调整 0.1×"
-            : "朗读结束后可调整语速"
+            ? NSLocalizedString("1.0× 到 2.0×，每次调整 0.1×", comment: "")
+            : NSLocalizedString("朗读结束后可调整语速", comment: "")
         speedValueLabel?.textColor = enabled ? .labelColor : .disabledControlTextColor
     }
 
@@ -1401,22 +1401,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             serviceLog("menu-bar-logo fallback=system-symbol")
         }
         item.button?.setAccessibilityLabel("Omi dsh")
-        item.button?.toolTip = "Omi dsh（本地朗读引擎）"
+        item.button?.toolTip = NSLocalizedString("Omi dsh（本地朗读引擎）", comment: "")
         item.button?.imagePosition = .imageOnly
         let menu = NSMenu()
         menu.delegate = self
-        let hint = NSMenuItem(title: "复制文本后按 ⌥⇧Q", action: nil, keyEquivalent: "")
+        let hint = NSMenuItem(title: NSLocalizedString("复制文本后按 ⌥⇧Q", comment: ""), action: nil, keyEquivalent: "")
         hint.isEnabled = false
         menu.addItem(hint)
         menu.addItem(.separator())
-        let readItem = NSMenuItem(title: "朗读剪贴板内容", action: #selector(readClipboard), keyEquivalent: "")
+        let readItem = NSMenuItem(title: NSLocalizedString("朗读剪贴板内容", comment: ""), action: #selector(readClipboard), keyEquivalent: "")
         readItem.target = self
         menu.addItem(readItem)
-        let stopItem = NSMenuItem(title: "停止朗读", action: #selector(stopReading), keyEquivalent: "")
+        let stopItem = NSMenuItem(title: NSLocalizedString("停止朗读", comment: ""), action: #selector(stopReading), keyEquivalent: "")
         stopItem.target = self
         menu.addItem(stopItem)
         menu.addItem(.separator())
-        let quitItem = NSMenuItem(title: "退出 Omi dsh", action: #selector(quitApplication), keyEquivalent: "q")
+        let quitItem = NSMenuItem(title: NSLocalizedString("退出 Omi dsh", comment: ""), action: #selector(quitApplication), keyEquivalent: "q")
         quitItem.target = self
         menu.addItem(quitItem)
         item.menu = menu
