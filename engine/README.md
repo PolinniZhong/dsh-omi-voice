@@ -1,3 +1,5 @@
+中文 | [English](engine/README.en.md)
+
 # Omi DSH 引擎（engine）
 
 dsh-omi-voice 的**本地朗读引擎**：一个 macOS 菜单栏应用，内置豆包 TTS 合成与本地 HTTP 服务（`127.0.0.1:8765`），供 dsh-omi-voice 插件在 DeepSeek Harness 对话内朗读。
