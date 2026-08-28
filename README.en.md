@@ -20,7 +20,7 @@ Hear AI replies in DeepSeek Harness (DSH) spoken aloud in a **natural Doubao TTS
 | Item | Description |
 |---|---|
 | Name | `dsh-omi-voice` |
-| Platform | DeepSeek Harness (`dsh web`, incl. desktop) + macOS Omi engine v0.1.2+ |
+| Platform | DeepSeek Harness (`dsh web`, incl. desktop) + macOS Omi engine v0.1.3+ |
 | Problem solved | DSH's built-in TTS (system voice / Edge TTS) sounds robotic; clipboard tools force you to copy first |
 | How it works | Tap 🔊 on a reply to read / pause / resume; reads only the final answer — tool logs, code, tables, diagrams are filtered out before synthesis |
 | Voice | Doubao TTS 1.0 (`seed-tts-1.0`), natural Chinese voice, pause/resume from where you paused |
@@ -64,7 +64,7 @@ This plugin is **BYOK**: Doubao speech is billed to your own Volcengine account 
 ## Installation
 
 ```bash
-dsh plugin --profile web add "github:PolinniZhong/dsh-omi-voice#v0.1.2&path:/"
+dsh plugin --profile web add "github:PolinniZhong/dsh-omi-voice#v0.1.3&path:/"
 ```
 
 For local development you can install a directory directly:
