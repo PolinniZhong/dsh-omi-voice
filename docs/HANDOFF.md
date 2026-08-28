@@ -1,3 +1,5 @@
+[English](HANDOFF.en.md)
+
 # dsh-omi-voice 交接文档（HANDOFF）
 
 > 项目当前状态 + 如何续作（对应 Omi 的 `HANDOFF.md`）。接手前先读本文件与 `AGENTS.md`。

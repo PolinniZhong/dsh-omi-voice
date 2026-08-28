@@ -1,3 +1,5 @@
+[English](DECISIONS.en.md)
+
 # dsh-omi-voice 决策记录（DECISIONS）
 
 > 记录已定型的决策与理由（对应 Omi 的 `DESIGN_DECISIONS.md`）。新决策按倒序追加。

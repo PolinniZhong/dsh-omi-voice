@@ -1,3 +1,5 @@
+[English](DESIGN.en.md)
+
 # dsh-omi-voice 架构设计（DESIGN）
 
 > 本文件是架构与设计的唯一权威来源（对应 Omi 的 `DESIGN.md`）。改动架构前先改这里。
