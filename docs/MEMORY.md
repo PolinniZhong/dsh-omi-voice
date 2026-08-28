@@ -59,8 +59,9 @@
 
 ## 本地化（引擎 UI）
 
-- **"中文串作 key"**：`NSLocalizedString("中文", comment: "")` + `en.lproj/Localizable.strings`（中文→英文）。中文系统自动回退（不命中的 key 返回 key 本身=中文），**只需 en.lproj、无需 zh-Hans.lproj**。
+- **"中文串作 key"**：`NSLocalizedString("中文", comment: "")` + `en.lproj/Localizable.strings`（中文→英文）+ **`zh-Hans.lproj/Localizable.strings`（key=中文）**。
+- ⚠️ **只加 en.lproj 是错的（Bug 教训）**：macOS Bundle 按 `.lproj` 判定 App 可用语言，只有 en.lproj 会判成"只会英文"，**中文系统也恒显示英文**（用户实测踩坑）。**两个 .lproj 必须都加**，才会按系统语言正确切换（zh-Hans 系统→中文、en 系统→英文）。
 - **含插值字符串不能这样翻**：`"全局快捷键...（\(status)）"` 的 `\(...)` 会先求值再当 key → 查不到。这类保留原样或改用 `String(format:)`。用脚本包裹时正则跳过含 `\` 的字符串即可。
-- **build-service.sh 必须复制 en.lproj**：`cp -R "$ROOT/Resources/en.lproj" "$APP/Contents/Resources/"`，否则 bundle 里没语言资源、回退中文。
-- **验证**：`Bundle(path: "<.app 路径>")` + `UserDefaults.set(["en"], forKey: "AppleLanguages")` + `bundle.localizedString(forKey:value:table:)`（注意用 App 的 Bundle，不是 CLI 脚本的 `Bundle.main`）。
+- **build-service.sh 必须复制两个 .lproj**：`cp -R "$ROOT/Resources/en.lproj" ...` 和 `cp -R "$ROOT/Resources/zh-Hans.lproj" ...`，否则 bundle 里没对应语言资源。
+- **验证**：用 `Bundle.preferredLocalizations(from: 系统语言, forPreferences: bundle.localizations)`（App 运行时真实逻辑）证明解析结果；`Bundle(path:)` + 脚本 `UserDefaults.set(AppleLanguages)` **无法驱动非主 Bundle 的语言解析**，别用那个测（会误判）。
 - 文档国际化：`README.en.md` / `AGENTS.en.md` / `engine/README.en.md`，中文原版顶部加 `中文 | [English](...)` 切换链接。

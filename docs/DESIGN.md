@@ -63,8 +63,8 @@
 
 ## 8. 本地化 / 国际化
 
-- 引擎 UI **自动跟随系统语言**：`main.swift` 用 `NSLocalizedString("中文串", comment: "")`（中文串即 key），配套 `Resources/en.lproj/Localizable.strings`（54 条 中文→英文）。
-- **中文自动回退**：未命中的 key 返回原中文串，因此中文系统**无需** `zh-Hans.lproj`；英文系统命中 `en.lproj` 显示英文。
-- 构建：`engine/build/build-service.sh` 复制 `en.lproj` 进 App 包 `Contents/Resources`。
+- 引擎 UI **自动跟随系统语言**：`main.swift` 用 `NSLocalizedString("中文串", comment: "")`（中文串即 key），配套 `Resources/en.lproj/Localizable.strings`（中文→英文）+ **`zh-Hans.lproj/Localizable.strings`（key=中文值）**。
+- ⚠️ **必须同时提供 en + zh-Hans 两个 .lproj**：macOS 的 Bundle 按 `.lproj` 判定"App 可用语言"，**只有 en.lproj 会被判定为"只会英文"，无论系统语言是中文还是英文都恒解析英文（真实 Bug 教训）**；两个都有才会正确按系统语言切换（中文系统→zh-Hans，英文系统→en）。
+- 构建：`engine/build/build-service.sh` 复制 `en.lproj` 与 `zh-Hans.lproj` 进 App 包 `Contents/Resources`。
 - 范围：用户可见 UI（设置面板/状态/菜单/按钮/错误提示/无障碍标签）；日志（`serviceLog`）、开发诊断保持中文。
 - **坑**：含插值（`\(...)`）的字符串不能用"字面量作 key"（会把展开后的值当 key，查不到），保留原样或改用 `String(format:)`。
