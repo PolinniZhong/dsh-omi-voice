@@ -18,7 +18,7 @@
    - ✅ **beancookie/awesome-dsh-plugin #75 已合并（2026-08-19）**——插件已进 DSH 插件主清单。
    - ✅ fendouai #20 已收录：PR 被关闭但内容已由维护者并入 main（commit `ada8503`，分类 `ui`），见 `data/plugins.json`。
    - ✅ **npm 已发布（2026-08-25）：`dsh-omi-voice@0.1.2`**，`repository` 已关联 GitHub；安装 `dsh plugin add dsh-omi-voice`。
-   - ⏳ **awesome-dsh-plugin org 主清单 PR #3148**（CI 通过、无冲突，待维护者合并，category `voice`）。
+   - ✅ **awesome-dsh-plugin org 主清单 PR #3148 已合并（2026-08-28）**——插件正式进入 12K★ org 清单（category `voice`，合并提交 `24e49688`；截图走插件仓库自己的 screenshots.json）。
    - ⏳ libukai #41 待维护者合并（等对方，无需操作）。
 2. **官方帖子**：deepseek-ai/deepseek-harness discussions #3084 已发（含 GIF 演示 + "轻量·类原生"定位），可回复互动提升可见度。
 3. **推广文章**：✅ **已发布（2026-08-25）**——小红书/公众号/知乎（用户自写，带来主要流量，仓库 2★ → 46★）。PR #3148 合并后可发一篇"入选官方清单"的更新文章做第二波。 
