@@ -1,5 +1,3 @@
-中文 | [English](AGENTS.en.md)
-
 # AGENTS.md — dsh-omi-voice
 
 > 给 AI 编码代理（Codex / Claude Code / DSH 等）的项目说明。修改本仓库前请先读本文件。
@@ -23,14 +21,14 @@ engine/                    # 本地引擎（macOS App，Swift）
 ├── Sources/               # ReadAloudService（App 壳）+ ReadAloudConfig（引擎内核）
 ├── Resources/             # 图标（OmiDSH.icns / Omi_logo.svg）+ Info.plist
 ├── build/build-service.sh # 构建脚本（swiftc 全量编译 + codesign）
-└── VERSION                # 引擎版本（须与插件 package.json 一致，当前 0.1.2）
+└── VERSION                # 引擎版本（须与插件 package.json 一致，当前 0.1.3）
 ```
 
 ## 关键约定
 
 1. **协议单一事实源**：任何端点/字段改动，先改 `docs/API.md`，再同步引擎（`engine/Sources/ReadAloudService/LocalTTSService.swift`）与插件（`client/lib/client.js`）。
 2. **引擎构建**：`engine/build/build-service.sh`，产物 `build/ReadAloudService.app`，安装到 `~/Applications/Omi DSH.app`（`ditto` + 重新 `codesign`）。
-3. **版本一致**：插件 `package.json` 的 `version` 与引擎 `engine/VERSION` 必须同步（当前 `0.1.2`）。
+3. **版本一致**：插件 `package.json` 的 `version` 与引擎 `engine/VERSION` 必须同步（当前 `0.1.3`）。
 4. **只点读、无自动朗读**：产品决策（v0.1.1 起），不要重新引入自动朗读。
 5. **Key 不出本机**：豆包 Key 只存 Omi 引擎的 Keychain，插件侧零 Key；日志/响应永不携带 Key。
 

@@ -34,7 +34,7 @@ v1 不提供（预留 v1.1）：`GET /v1/voices` 音色列表、分段预取。
 {
   "ok": true,
   "engine": "omi",
-  "engineVersion": "0.1.2",
+  "engineVersion": "0.1.3",
   "protocolVersion": 1,
   "keyConfigured": true,
   "voice": "zh_female_shuangkuaisisi_moon_bigtts",

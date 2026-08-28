@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3] - 2026-08-27
+
+- **引擎界面国际化（跟随系统语言）**：`main.swift` 用户可见 UI 用 `NSLocalizedString` 包裹（54 个字符串），配套 `en.lproj`（英文）+ **`zh-Hans.lproj`**（中文）。修复"只加 en.lproj 导致恒显示英文"的 Bug——**必须 en + zh-Hans 两个 .lproj**，英文系统→英文、中文系统→中文，零手动切换。
+- **构建脚本**：`build-service.sh` 复制 en + zh-Hans 两个语言资源进 App 包。
+- **知识库 / 文档双语化**：`docs/DESIGN`、`DECISIONS`、`MEMORY`、`HANDOFF` 新增英文版（`*.en.md`），中文原版顶部加 `[English](...)` 切换链接；此前已完成 README / AGENTS / engine README 的双语。
+- 无协议/功能变更，纯 UI 国际化 + 文档双语。
+
 ## [0.1.2] - 2026-08-18
 
 - **暂停/继续**：播放中再点 🔊 暂停、再点从暂停位置继续（引擎新增 `/v1/pause` `/v1/resume`，插件按钮三态）

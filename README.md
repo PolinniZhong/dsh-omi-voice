@@ -1,5 +1,3 @@
-中文 | [English](README.en.md)
-
 <h1 align="center">dsh-omi-voice</h1>
 
 <p align="center">
@@ -26,7 +24,7 @@
 | 项目 | 说明 |
 |---|---|
 | 插件名称 | `dsh-omi-voice` |
-| 适配平台 | DeepSeek Harness（`dsh web`，含桌面端）+ macOS 上的 Omi 引擎 v0.1.2+ |
+| 适配平台 | DeepSeek Harness（`dsh web`，含桌面端）+ macOS 上的 Omi 引擎 v0.1.3+ |
 | 解决的问题 | DSH 内置朗读（系统语音 / Edge TTS）音色机械、像上个时代的播报腔；通用剪贴板工具又要先复制再读 |
 | 工作方式 | 点回复旁 🔊 朗读/暂停/继续；只读最终回答，工具日志/代码/表格/图形朗读前自动过滤 |
 | 语音能力 | 豆包 TTS 1.0（`seed-tts-1.0`），自然中文音色，支持暂停/继续（从暂停处续播） |
@@ -70,7 +68,7 @@ flowchart LR
 ## 安装
 
 ```bash
-dsh plugin --profile web add "github:PolinniZhong/dsh-omi-voice#v0.1.2&path:/"
+dsh plugin --profile web add "github:PolinniZhong/dsh-omi-voice#v0.1.3&path:/"
 ```
 
 已发布 npm，也可直接装（更短）：

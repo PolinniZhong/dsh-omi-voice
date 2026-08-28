@@ -6,7 +6,7 @@
 
 ## Current state (2026-08-18, updated to 2026-08-27)
 
-- **Version**: v0.1.2 (plugin `package.json` and engine `engine/VERSION` unified).
+- **Version**: v0.1.3 (plugin `package.json` and engine `engine/VERSION` unified).
 - **Published**: GitHub public repo `PolinniZhong/dsh-omi-voice`, containing plugin (root) + engine (engine/) + docs + screenshots/GIF + Release.
 - **Features landed & verified**: tap-to-read / pause / resume / stop, failure-reason feedback, reads only the final answer, code/table/diagram filtering, LRU cache, dedup/throttle, BYOK.
 - **UI i18n (2026-08-27)**: engine UI follows the system language (NSLocalizedString + `en.lproj` + `zh-Hans.lproj`), English system→English, Chinese system→Chinese; docs are bilingual (README/AGENTS/engine README + switching links). **Synced to GitHub** (main.swift + both .lproj + build-service.sh).
