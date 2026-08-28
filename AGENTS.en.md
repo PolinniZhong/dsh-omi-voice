@@ -21,7 +21,7 @@ engine/                    # Local engine (macOS app, Swift)
 ├── Sources/               # ReadAloudService (app shell) + ReadAloudConfig (engine core)
 ├── Resources/             # Icons (OmiDSH.icns / Omi_logo.svg) + Info.plist
 ├── build/build-service.sh # Build script (swiftc full compile + codesign)
-└── VERSION                # Engine version (must match plugin package.json; currently 0.1.2)
+└── VERSION                # Engine version (must match plugin package.json; currently 0.1.3)
 ```
 
 ## Key conventions
